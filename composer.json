@@ -14,8 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Acquia\\EnvironmentDetector\\": "./src/",
-            "Acquia\\EnvironmentDetector\\Tests": "./tests/"
+            "Acquia\\EnvironmentDetector\\": "src/",
+            "Acquia\\EnvironmentDetector\\Tests\\": "tests/"
         }
     }
 }
