@@ -115,4 +115,11 @@ class AcquiaEnvironmentDetector {
   public static function getAcsfDbName() {
     return isset($GLOBALS['gardens_site_settings']) && self::isAcsfEnv() ? $GLOBALS['gardens_site_settings']['conf']['acsf_db_name'] : NULL;
   }
+
+  /**
+   * If this isn't a Cloud environment, assume it's local.
+   */
+  public static function isLocalEnv() {
+    return !self::isAhEnv();
+  }
 }
