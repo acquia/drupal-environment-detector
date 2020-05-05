@@ -1,7 +1,7 @@
 {
     "name": "acquia/environment-detector",
     "description": "Provides common methods for detecting the current Acquia environment",
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "authors":[
         {
             "name": "Acquia Engineering",
