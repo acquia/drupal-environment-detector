@@ -1,4 +1,4 @@
-Acquia Environment Detector
+Acquia Drupal Environment Detector
 ====
 
 This package provides a common static class and methods for detecting the current Acquia Cloud environment.
@@ -7,7 +7,7 @@ This package provides a common static class and methods for detecting the curren
 
 In your project, require the plugin with Composer:
 
-`composer require acquia/environment-detector`
+`composer require acquia/drupal-environment-detector`
 
 # License
 

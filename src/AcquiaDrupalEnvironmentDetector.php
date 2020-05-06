@@ -1,8 +1,8 @@
 <?php
 
-namespace Acquia\EnvironmentDetector;
+namespace Acquia\DrupalEnvironmentDetector;
 
-class AcquiaEnvironmentDetector {
+class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH env.
    */

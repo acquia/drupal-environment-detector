@@ -1,5 +1,5 @@
 {
-    "name": "acquia/environment-detector",
+    "name": "acquia/drupal-environment-detector",
     "description": "Provides common methods for detecting the current Acquia environment",
     "license": "GPL-2.0-or-later",
     "authors":[
@@ -14,8 +14,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Acquia\\EnvironmentDetector\\": "src/",
-            "Acquia\\EnvironmentDetector\\Tests\\": "tests/"
+            "Acquia\\DrupalEnvironmentDetector\\": "src/",
+            "Acquia\\DrupalEnvironmentDetector\\Tests\\": "tests/"
         }
     }
 }

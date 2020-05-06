@@ -1,6 +1,6 @@
 <?php
 
-use Acquia\EnvironmentDetector\AcquiaEnvironmentDetector;
+use Acquia\DrupalEnvironmentDetector\AcquiaDrupalEnvironmentDetector;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,7 +20,7 @@ class EnvironmentDetectorTest extends TestCase {
    */
   public function testIsAhDevEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
-    $this::assertEquals($expected_env === 'dev', AcquiaEnvironmentDetector::isAhDevEnv());
+    $this::assertEquals($expected_env === 'dev', AcquiaDrupalEnvironmentDetector::isAhDevEnv());
   }
 
   /**
@@ -35,7 +35,7 @@ class EnvironmentDetectorTest extends TestCase {
    */
   public function testIsAhStageEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
-    $this::assertEquals($expected_env === 'stage', AcquiaEnvironmentDetector::isAhStageEnv());
+    $this::assertEquals($expected_env === 'stage', AcquiaDrupalEnvironmentDetector::isAhStageEnv());
   }
 
   /**
@@ -50,7 +50,7 @@ class EnvironmentDetectorTest extends TestCase {
    */
   public function testIsAhProdEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
-    $this::assertEquals($expected_env === 'prod', AcquiaEnvironmentDetector::isAhProdEnv());
+    $this::assertEquals($expected_env === 'prod', AcquiaDrupalEnvironmentDetector::isAhProdEnv());
   }
 
   /**
@@ -65,7 +65,7 @@ class EnvironmentDetectorTest extends TestCase {
    */
   public function testIsAhOdeEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
-    $this::assertEquals($expected_env === 'ode', AcquiaEnvironmentDetector::isAhOdeEnv());
+    $this::assertEquals($expected_env === 'ode', AcquiaDrupalEnvironmentDetector::isAhOdeEnv());
   }
 
   /**
