@@ -105,15 +105,14 @@ class AcquiaDrupalEnvironmentDetector {
   public static function getAhEnv() {
     return getenv('AH_SITE_ENVIRONMENT');
   }
-  
+
   /**
    * Get AH realm.
    */
   public static function getAhRealm() {
     return getenv('AH_REALM');
   }
-  
-    
+
   /**
    * Get AH non production.
    */
