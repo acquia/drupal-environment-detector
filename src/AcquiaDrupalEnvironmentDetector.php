@@ -128,7 +128,12 @@ class AcquiaDrupalEnvironmentDetector {
   }
   
   /**
-   * Get AH files.
+   * The path to the persistent file storage mount.
+   *
+   * It is used to store Drupal public and private files, but is only a common
+   * base path and not tied to any particular site or type of file.
+   *
+   * @see https://docs.acquia.com/acquia-cloud/manage/files/about/
    */
   public static function getAhFilesRoot() {
     return '/mnt/files/' . self::getAhGroup() . '.' . self::getAhEnv();
