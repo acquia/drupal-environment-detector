@@ -82,7 +82,7 @@ class AcquiaDrupalEnvironmentDetector {
    * Is AH IDE.
    */
   public static function isAhIdeEnv() {
-    return self::getAhEnv() == 'IDE';
+    return strtolower(self::getAhEnv()) == 'ide';
   }
 
   /**
