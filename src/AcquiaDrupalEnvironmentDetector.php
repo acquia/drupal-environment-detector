@@ -2,6 +2,8 @@
 
 namespace Acquia\DrupalEnvironmentDetector;
 
+use Symfony\Component\Console\Input\ArgvInput;
+
 class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH env.
@@ -148,6 +150,28 @@ class AcquiaDrupalEnvironmentDetector {
   public static function getAcsfDbName() {
     return isset($GLOBALS['gardens_site_settings']) && self::isAcsfEnv() ? $GLOBALS['gardens_site_settings']['conf']['acsf_db_name'] : NULL;
   }
+
+  /**
+   * Get a standardized site / db name.
+   *
+   * On ACE or simple multisite installs, this is the site directory under
+   * 'docroot/sites'.
+   *
+   * On ACSF, this is the ACSF db name.
+   *
+   * @param string $site_path
+   *   Directory site path.
+   *
+   * @return string|null
+   *   Site name.
+   */
+  public static function getSiteName($site_path) {
+    if (self::isAcsfEnv()) {
+      return self::getAcsfDbName();
+    }
+
+    return str_replace('sites/', '', $site_path);
+  } 
 
   /**
    * If this isn't a Cloud environment, assume it's local.
