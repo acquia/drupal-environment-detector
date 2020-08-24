@@ -14,6 +14,9 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "phpunit/phpunit": "^9.1"
     },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "phpcodesniffer-search-depth": "4"
     },
@@ -22,8 +25,5 @@
             "Acquia\\DrupalEnvironmentDetector\\": "src/",
             "Acquia\\DrupalEnvironmentDetector\\Tests\\": "tests/"
         }
-    },
-    "config": {
-        "sort-packages": true
     }
 }
