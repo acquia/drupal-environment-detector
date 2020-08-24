@@ -2,7 +2,11 @@
 
 namespace Acquia\DrupalEnvironmentDetector;
 
+/**
+ * Detect various properties of the current Acquia environment.
+ */
 class AcquiaDrupalEnvironmentDetector {
+
   /**
    * Is AH env.
    */
@@ -119,14 +123,14 @@ class AcquiaDrupalEnvironmentDetector {
   public static function getAhNonProduction() {
     return getenv('AH_NON_PRODUCTION');
   }
-    
+
   /**
    * Get AH application UUID.
    */
   public static function getAhApplicationUuid() {
     return getenv('AH_APPLICATION_UUID');
   }
-  
+
   /**
    * The path to the persistent file storage mount.
    *
@@ -155,4 +159,5 @@ class AcquiaDrupalEnvironmentDetector {
   public static function isLocalEnv() {
     return !self::isAhEnv();
   }
+
 }
