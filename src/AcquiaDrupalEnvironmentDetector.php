@@ -47,32 +47,63 @@ class AcquiaDrupalEnvironmentDetector {
 
   /**
    * Is AH prod.
+   *
+   * @param string|null $ah_env
+   *   Environment machine name.
+   *
+   * @return bool
+   *   TRUE if prod, FALSE otherwise.
    */
-  public static function isAhProdEnv() {
-    $ah_env = self::getAhEnv();
+  public static function isAhProdEnv($ah_env = NULL) {
+    if (is_null($ah_env)) {
+      $ah_env = self::getAhEnv();
+    }
     // ACE prod is 'prod'; ACSF can be '01live', '02live', ...
     return $ah_env == 'prod' || preg_match('/^\d*live$/', $ah_env);
   }
 
   /**
    * Is AH stage.
+   *
+   * @param string|null $ah_env
+   *   Environment machine name.
+   *
+   * @return bool
+   *   TRUE if stage, FALSE otherwise.
    */
-  public static function isAhStageEnv() {
-    $ah_env = self::getAhEnv();
+  public static function isAhStageEnv($ah_env = NULL) {
+    if (is_null($ah_env)) {
+      $ah_env = self::getAhEnv();
+    }
     // ACE staging is 'test' or 'stg'; ACSF is '01test', '02test', ...
     return preg_match('/^\d*test$/', $ah_env) || $ah_env == 'stg';
   }
 
   /**
    * Is AH dev.
+   *
+   * @param string|null $ah_env
+   *   Environment machine name.
+   *
+   * @return false|int
+   *   TRUE if dev, FALSE otherwise.
    */
-  public static function isAhDevEnv() {
+  public static function isAhDevEnv($ah_env = NULL) {
+    if (is_null($ah_env)) {
+      $ah_env = self::getAhEnv();
+    }
     // ACE dev is 'dev', 'dev1', ...; ACSF dev is '01dev', '02dev', ...
-    return (preg_match('/^\d*dev\d*$/', self::getAhEnv()));
+    return (preg_match('/^\d*dev\d*$/', $ah_env));
   }
 
   /**
    * Is AH ODE.
+   *
+   * @param string|null $ah_env
+   *   Environment machine name.
+   *
+   * @return false|int
+   *   TRUE if ODE, FALSE otherwise.
    */
   public static function isAhOdeEnv($ah_env = NULL) {
     if (is_null($ah_env)) {
@@ -84,9 +115,18 @@ class AcquiaDrupalEnvironmentDetector {
 
   /**
    * Is AH IDE.
+   *
+   * @param string|null $ah_env
+   *   Environment machine name.
+   *
+   * @return bool
+   *   TRUE if IDE, FALSE otherwise.
    */
-  public static function isAhIdeEnv() {
-    return strtolower(self::getAhEnv()) == 'ide';
+  public static function isAhIdeEnv($ah_env = NULL) {
+    if (is_null($ah_env)) {
+      $ah_env = self::getAhEnv();
+    }
+    return strtolower($ah_env) == 'ide';
   }
 
   /**
