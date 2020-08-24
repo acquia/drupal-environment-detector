@@ -2,7 +2,7 @@
     "name": "acquia/drupal-environment-detector",
     "description": "Provides common methods for detecting the current Acquia environment",
     "license": "GPL-2.0-or-later",
-    "authors":[
+    "authors": [
         {
             "name": "Acquia Engineering",
             "homepage": "https://www.acquia.com",

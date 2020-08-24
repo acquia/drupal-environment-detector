@@ -1,0 +1,4 @@
+---
+acquia/drupal-environment-detector:
+  type: "package"
+  version_dev: "dev-master"
