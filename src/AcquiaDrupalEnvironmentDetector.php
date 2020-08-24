@@ -2,8 +2,6 @@
 
 namespace Acquia\DrupalEnvironmentDetector;
 
-use Symfony\Component\Console\Input\ArgvInput;
-
 class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH env.
