@@ -10,9 +10,12 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "^9.1",
         "acquia/coding-standards": "^0.4.3",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0"
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "phpunit/phpunit": "^9.1"
+    },
+    "extra": {
+        "phpcodesniffer-search-depth": "4"
     },
     "autoload": {
         "psr-4": {
@@ -20,7 +23,7 @@
             "Acquia\\DrupalEnvironmentDetector\\Tests\\": "tests/"
         }
     },
-    "extra": {
-        "phpcodesniffer-search-depth": "4"
+    "config": {
+        "sort-packages": true
     }
 }
