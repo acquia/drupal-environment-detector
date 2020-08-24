@@ -2,7 +2,11 @@
 
 namespace Acquia\DrupalEnvironmentDetector;
 
+/**
+ * Detect various properties of the current Acquia environment.
+ */
 class AcquiaDrupalEnvironmentDetector {
+
   /**
    * Is AH env.
    */
@@ -185,4 +189,5 @@ class AcquiaDrupalEnvironmentDetector {
   public static function isLocalEnv() {
     return !self::isAhEnv();
   }
+
 }
