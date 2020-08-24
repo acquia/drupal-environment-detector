@@ -48,9 +48,11 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH prod.
    *
-   * @param null $ah_env
+   * @param string|null $ah_env
+   *   Environment machine name.
    *
    * @return bool
+   *   TRUE if prod, FALSE otherwise.
    */
   public static function isAhProdEnv($ah_env = NULL) {
     if (is_null($ah_env)) {
@@ -63,9 +65,11 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH stage.
    *
-   * @param null $ah_env
+   * @param string|null $ah_env
+   *   Environment machine name.
    *
    * @return bool
+   *   TRUE if stage, FALSE otherwise.
    */
   public static function isAhStageEnv($ah_env = NULL) {
     if (is_null($ah_env)) {
@@ -78,9 +82,11 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH dev.
    *
-   * @param null $ah_env
+   * @param string|null $ah_env
+   *   Environment machine name.
    *
    * @return false|int
+   *   TRUE if dev, FALSE otherwise.
    */
   public static function isAhDevEnv($ah_env = NULL) {
     if (is_null($ah_env)) {
@@ -93,9 +99,11 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH ODE.
    *
-   * @param null $ah_env
+   * @param string|null $ah_env
+   *   Environment machine name.
    *
    * @return false|int
+   *   TRUE if ODE, FALSE otherwise.
    */
   public static function isAhOdeEnv($ah_env = NULL) {
     if (is_null($ah_env)) {
@@ -108,9 +116,11 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH IDE.
    *
-   * @param null $ah_env
+   * @param string|null $ah_env
+   *   Environment machine name.
    *
    * @return bool
+   *   TRUE if IDE, FALSE otherwise.
    */
   public static function isAhIdeEnv($ah_env = NULL) {
     if (is_null($ah_env)) {
