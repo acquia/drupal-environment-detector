@@ -23,7 +23,7 @@ env:
     - ORCA_SUT_NAME=acquia/drupal-environment-detector
     - ORCA_SUT_BRANCH=master
     - ORCA_VERSION=^2
-    - ORCA_PACKAGES_CONFIG_ALTER=./tests/packages_alter.yml
+    - ORCA_PACKAGES_CONFIG_ALTER=../drupal-environment-detector/tests/packages_alter.yml
 
 jobs:
   fast_finish: true
