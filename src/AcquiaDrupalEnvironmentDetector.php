@@ -194,6 +194,28 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
+   * Get a standardized site / db name.
+   *
+   * On ACE or simple multisite installs, this is the site directory under
+   * 'docroot/sites'.
+   *
+   * On ACSF, this is the ACSF db name.
+   *
+   * @param string $site_path
+   *   Directory site path.
+   *
+   * @return string|null
+   *   Site name.
+   */
+  public static function getSiteName($site_path) {
+    if (self::isAcsfEnv()) {
+      return self::getAcsfDbName();
+    }
+
+    return str_replace('sites/', '', $site_path);
+  }
+
+  /**
    * If this isn't a Cloud environment, assume it's local.
    */
   public static function isLocalEnv() {
