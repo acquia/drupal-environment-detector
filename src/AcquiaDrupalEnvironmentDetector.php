@@ -213,7 +213,7 @@ class AcquiaDrupalEnvironmentDetector {
     }
 
     return str_replace('sites/', '', $site_path);
-  } 
+  }
 
   /**
    * If this isn't a Cloud environment, assume it's local.
