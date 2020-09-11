@@ -131,9 +131,11 @@ class AcquiaDrupalEnvironmentDetector {
 
   /**
    * Is AH devcloud.
+   *
+   * The devcloud realm includes Acquia Cloud Professional (ACP).
    */
   public static function isAhDevCloud() {
-    return (!empty($_SERVER['HTTP_HOST']) && strstr($_SERVER['HTTP_HOST'], 'devcloud'));
+    return self::getAhRealm() == 'devcloud';
   }
 
   /**
