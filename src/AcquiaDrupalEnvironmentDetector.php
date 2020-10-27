@@ -139,21 +139,30 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
-   * Get AH group.
+   * Get Acquia hosting site group.
+   *
+   * @return string
+   *   Site group (usually a customer name).
    */
   public static function getAhGroup() {
     return getenv('AH_SITE_GROUP');
   }
 
   /**
-   * Get AH env.
+   * Get Acquia hosting environment.
+   *
+   * @return string
+   *   Environment name (e.g. dev, stage, prod).
    */
   public static function getAhEnv() {
     return getenv('AH_SITE_ENVIRONMENT');
   }
 
   /**
-   * Get AH realm.
+   * Get Acquia hosting realm.
+   *
+   * @return string
+   *   Realm name (e.g. prod, gardens).
    */
   public static function getAhRealm() {
     return getenv('AH_REALM');
