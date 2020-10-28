@@ -82,6 +82,7 @@ class EnvironmentDetectorTest extends TestCase {
       ['02dev', 'dev'],
       ['test', 'stage'],
       ['stg', 'stage'],
+      ['stage', 'stage'],
       ['01test', 'stage'],
       ['02test', 'stage'],
       ['prod', 'prod'],
