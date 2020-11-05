@@ -79,7 +79,7 @@ class AcquiaDrupalEnvironmentDetector {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
-    // ACE staging is 'test' or 'stg' or 'stage'; ACSF is '01test', '02test', ...
+    // ACE staging is 'test', 'stg', or 'stage'; ACSF is '01test', '02test', ...
     return preg_match('/^\d*test$/', $ah_env) || $ah_env == 'stg' || $ah_env === 'stage';
   }
 
