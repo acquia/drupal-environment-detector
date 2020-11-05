@@ -46,7 +46,7 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
-   * Is AH prod.
+   * Is this a prod environment on Acquia hosting.
    *
    * @param string|null $ah_env
    *   Environment machine name.
@@ -63,7 +63,11 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
-   * Is AH stage.
+   * Is this a stage environment on Acquia hosting.
+   *
+   * Legacy stage environments are typically named 'stg'. More recently they are
+   * named 'test'. Some applications may have non-standard environment names,
+   * these are not supported.
    *
    * @param string|null $ah_env
    *   Environment machine name.
@@ -80,7 +84,7 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
-   * Is AH dev.
+   * Is this a dev environment on Acquia hosting.
    *
    * @param string|null $ah_env
    *   Environment machine name.
