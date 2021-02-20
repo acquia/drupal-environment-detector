@@ -14,14 +14,14 @@ class FilePaths {
    *
    * This file contains information about all sites on an ACSF subscription.
    *
-   * @param $ah_group
+   * @param string $ah_group
    *   The Acquia Hosting site group.
-   * @param $ah_env
+   * @param string $ah_env
    *   The Acquia Hosting environment.
    *
    * @return string
    */
-  public static function acsfSitesJson($ah_group, $ah_env) {
+  public static function acsfSitesJson(string $ah_group, string $ah_env) {
     return "/mnt/files/$ah_group.$ah_env/files-private/sites.json";
   }
 
@@ -33,7 +33,8 @@ class FilePaths {
    *
    * @see https://docs.acquia.com/acquia-cloud/manage/files/about/
    */
-  public static function ahFilesRoot($ah_group, $ah_env) {
+  public static function ahFilesRoot(string $ah_group, string $ah_env) {
     return '/mnt/files/' . $ah_group . '.' . $ah_env;
   }
+
 }

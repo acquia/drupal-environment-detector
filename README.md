@@ -1,9 +1,13 @@
 Acquia Drupal Environment Detector
 ====
 
-This package provides a common static class and methods for detecting the current Acquia Cloud environment.
+This package provides a static class that your application can use to **detect** various characteristics of the **current** hosting environment.
 
-It can report several characteristics of the current environment, including:
+It also provides static **helper** classes that provide canonical information about **any** arbitrary environment.
+
+## Detector class
+
+Scans environment variables and settings files to determine several characteristics of the current hosting environment, including:
 - Hosting provider (Acquia or non-Acquia)
 - Hosting type (ACE, ACSF)
 - Hosting realm (prod, devcloud, gardens, etc)
@@ -12,6 +16,12 @@ It can report several characteristics of the current environment, including:
 - Common site properties (name, file path)
 
 See all available methods in [src/AcquiaDrupalEnvironmentDetector.php](src/AcquiaDrupalEnvironmentDetector.php).
+
+## Helper classes
+
+The additional static classes allow you to predict the characteristics of any Acquia hosting environment given the site group and environment name, including:
+- A mapping of Acquia environment names (e.g. `01test`, `stg`, `live`) to human-readable standard names (`dev`, `stage`, `prod`)
+- A set of standard filesystem paths for things like the private files directory or `sites.json` file on ACSF.
 
 ## Installation and usage
 

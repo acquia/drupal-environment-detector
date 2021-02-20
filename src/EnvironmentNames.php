@@ -81,4 +81,5 @@ class EnvironmentNames {
   public static function isAhIdeEnv($ah_env) {
     return strtolower($ah_env) === 'ide';
   }
+
 }
