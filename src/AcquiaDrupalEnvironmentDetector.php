@@ -42,7 +42,7 @@ class AcquiaDrupalEnvironmentDetector {
       return FALSE;
     }
 
-    return file_exists("/mnt/files/$ah_group.$ah_env/files-private/sites.json");
+    return file_exists(FilePaths::acsfSitesJson($ah_group, $ah_env));
   }
 
   /**
@@ -58,16 +58,11 @@ class AcquiaDrupalEnvironmentDetector {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
-    // ACE prod is 'prod'; ACSF can be '01live', '02live', ...
-    return $ah_env == 'prod' || preg_match('/^\d*live$/', $ah_env);
+    return EnvironmentNames::isAhProdEnv($ah_env);
   }
 
   /**
    * Is this a stage environment on Acquia hosting.
-   *
-   * Legacy stage environments are typically named 'stg'. More recently they are
-   * named 'test'. Some applications may have non-standard environment names,
-   * these are not supported.
    *
    * @param string|null $ah_env
    *   Environment machine name.
@@ -79,8 +74,7 @@ class AcquiaDrupalEnvironmentDetector {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
-    // ACE staging is 'test', 'stg', or 'stage'; ACSF is '01test', '02test', ...
-    return preg_match('/^\d*test$/', $ah_env) || $ah_env == 'stg' || $ah_env === 'stage';
+    return EnvironmentNames::isAhStageEnv($ah_env);
   }
 
   /**
@@ -96,8 +90,7 @@ class AcquiaDrupalEnvironmentDetector {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
-    // ACE dev is 'dev', 'dev1', ...; ACSF dev is '01dev', '02dev', ...
-    return (preg_match('/^\d*dev\d*$/', $ah_env));
+    return EnvironmentNames::isAhDevEnv($ah_env);
   }
 
   /**
@@ -113,8 +106,7 @@ class AcquiaDrupalEnvironmentDetector {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
-    // CDEs (formerly 'ODEs') can be 'ode1', 'ode2', ...
-    return (preg_match('/^ode\d*$/', $ah_env));
+    return EnvironmentNames::isAhOdeEnv($ah_env);
   }
 
   /**
@@ -130,7 +122,7 @@ class AcquiaDrupalEnvironmentDetector {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
-    return strtolower($ah_env) == 'ide';
+    return EnvironmentNames::isAhIdeEnv($ah_env);
   }
 
   /**
@@ -195,7 +187,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @see https://docs.acquia.com/acquia-cloud/manage/files/about/
    */
   public static function getAhFilesRoot() {
-    return '/mnt/files/' . self::getAhGroup() . '.' . self::getAhEnv();
+    return FilePaths::ahFilesRoot(self::getAhGroup(), self::getAhEnv());
   }
 
   /**
