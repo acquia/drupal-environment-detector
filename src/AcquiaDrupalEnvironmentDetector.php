@@ -221,15 +221,24 @@ class AcquiaDrupalEnvironmentDetector {
 
     return str_replace('sites/', '', $site_path);
   }
-  
+
+  /**
+   * Is this a Lando environment using the Acquia recipe.
+   */
   public static function isAcquiaLandoEnv() {
-    return self::isAhEnv() && self::isLandoEnv();
+    return (bool) getenv('AH_SITE_ENVIRONMENT') === 'LANDO';
   }
-  
+
+  /**
+   * Is this a Lando environment.
+   */
   public static function isLandoEnv() {
-    return (bool) self::getLandoInfo();
+    return getenv('LANDO') === 'ON';
   }
-  
+
+  /**
+   * Get Lando info.
+   */
   public static function getLandoInfo() {
     return getenv('LANDO_INFO');
   }
