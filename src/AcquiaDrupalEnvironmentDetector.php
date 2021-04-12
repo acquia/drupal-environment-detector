@@ -223,7 +223,7 @@ class AcquiaDrupalEnvironmentDetector {
   }
   
   public static function isAcquiaLandoEnv() {
-    return self::isAhEnv() && self:
+    return self::isAhEnv() && self::isLandoEnv();
   }
   
   public static function isLandoEnv() {
