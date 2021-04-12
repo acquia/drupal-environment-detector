@@ -1,4 +1,4 @@
-1Acquia Drupal Environment Detector
+Acquia Drupal Environment Detector
 ====
 
 This package provides a static class that your application can use to **detect** various characteristics of the **current** hosting environment.
