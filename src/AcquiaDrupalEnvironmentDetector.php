@@ -238,7 +238,7 @@ class AcquiaDrupalEnvironmentDetector {
    * If this isn't a Cloud environment, assume it's local.
    */
   public static function isLocalEnv() {
-    return !self::isAhEnv() || self:isAcquiaLandoEnv();
+    return !self::isAhEnv() || self::isAcquiaLandoEnv();
   }
 
 }
