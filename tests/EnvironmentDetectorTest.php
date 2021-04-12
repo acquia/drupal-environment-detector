@@ -80,7 +80,7 @@ class EnvironmentDetectorTest extends TestCase {
    */
   public function testIsAcquiaLandoEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
-    $this::assertEquals($expected_env === 'LANDO', AcquiaDrupalEnvironmentDetector::isAcquiaLandoEnv());
+    $this::assertEquals($expected_env === 'lando', AcquiaDrupalEnvironmentDetector::isAcquiaLandoEnv());
   }
 
   /**
