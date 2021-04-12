@@ -226,7 +226,7 @@ class AcquiaDrupalEnvironmentDetector {
    * Is this a Lando environment using the Acquia recipe.
    */
   public static function isAcquiaLandoEnv() {
-    return (bool) getenv('AH_SITE_ENVIRONMENT') === 'LANDO';
+    return getenv('AH_SITE_ENVIRONMENT') === 'LANDO';
   }
 
   /**
