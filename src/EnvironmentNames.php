@@ -19,8 +19,8 @@ class EnvironmentNames {
    *   TRUE if prod, FALSE otherwise.
    */
   public static function isAhProdEnv($ah_env) {
-    // ACE prod is 'prod'; ACSF can be '01live', '02live', ...
-    return $ah_env === 'prod' || preg_match('/^\d*live$/', $ah_env);
+    // ACE prod is 'prod'; ACSF can be '01live', '01update', '02live', '02update'...
+    return $ah_env === 'prod' || preg_match('/^\d*live$/', $ah_env) || preg_match('/^\d*update$/', $ah_env);
   }
 
   /**
@@ -37,8 +37,8 @@ class EnvironmentNames {
    *   TRUE if stage, FALSE otherwise.
    */
   public static function isAhStageEnv($ah_env) {
-    // ACE staging is 'test', 'stg', or 'stage'; ACSF is '01test', '02test', ...
-    return preg_match('/^\d*test$/', $ah_env) || $ah_env === 'stg' || $ah_env === 'stage';
+    // ACE staging is 'test', 'stg', or 'stage'; ACSF is '01test', '01testup', '02test', '02testup'...
+    return preg_match('/^\d*test$/', $ah_env) || preg_match('/^\d*testup$/', $ah_env) || $ah_env === 'stg' || $ah_env === 'stage';
   }
 
   /**
@@ -51,8 +51,8 @@ class EnvironmentNames {
    *   TRUE if dev, FALSE otherwise.
    */
   public static function isAhDevEnv($ah_env) {
-    // ACE dev is 'dev', 'dev1', ...; ACSF dev is '01dev', '02dev', ...
-    return (preg_match('/^\d*dev\d*$/', $ah_env));
+    // ACE dev is 'dev', 'dev1', ...; ACSF dev is '01dev', '01devup', '02dev', '02devup'...
+    return preg_match('/^\d*dev\d*$/', $ah_env) || preg_match('/^\d*devup$/', $ah_env);
   }
 
   /**
