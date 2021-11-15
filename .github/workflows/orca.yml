@@ -13,6 +13,8 @@ jobs:
       ORCA_SUT_BRANCH: master
       ORCA_VERSION: dev-develop
       ORCA_JOB: ${{ matrix.orca-job }}
+      ORCA_COVERALLS_ENABLE: ${{ matrix.coveralls-enable }}
+      COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     strategy:
       matrix:
@@ -38,9 +40,14 @@ jobs:
           - INTEGRATED_UPGRADE_TEST_TO_NEXT_MINOR_DEV
           - LOOSE_DEPRECATED_CODE_SCAN
         php-version: [ "7.3" ]
+        coveralls-enable: [ "FALSE" ]
         include:
           - orca-job: ISOLATED_TEST_ON_CURRENT
             php-version: "8.0"
+            coveralls-enable: "FALSE"
+          - orca-job: ISOLATED_TEST_ON_CURRENT
+            php-version: "7.3"
+            coveralls-enable: "TRUE"
 
     steps:
       - uses: actions/checkout@v2
@@ -58,6 +65,7 @@ jobs:
         run: |
           composer create-project --no-dev --no-install --ignore-platform-req=php acquia/orca ../orca "$ORCA_VERSION"
           curl https://patch-diff.githubusercontent.com/raw/acquia/orca/pull/177.patch | git -C ../orca apply
+          curl https://patch-diff.githubusercontent.com/raw/acquia/orca/pull/179.patch | git -C ../orca apply
           composer install -d ../orca
           ../orca/bin/ci/before_install.sh
 
