@@ -1,3 +1,7 @@
 vendor
 .phpcs-cache
 .idea
+.DS_Store
+ .idea/
+ .php_cache
+ vendor/
