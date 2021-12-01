@@ -39,7 +39,7 @@ jobs:
           - ISOLATED_TEST_ON_NEXT_MINOR_DEV
           - INTEGRATED_UPGRADE_TEST_TO_NEXT_MINOR_DEV
           - LOOSE_DEPRECATED_CODE_SCAN
-        php-version: [ "7.4" ]
+        php-version: [ "7.3" ]
         coveralls-enable: [ "FALSE" ]
         include:
           - orca-job: ISOLATED_TEST_ON_CURRENT
