@@ -64,7 +64,7 @@ jobs:
 
       - name: Before install
         run: |
-          git clone https://github.com/acquia/orca.git
+          git clone https://github.com/acquia/orca.git ../orca
           git -C ../orca checkout ec215738330008d409eb7c55b8d5a30dddb3daaa
           curl https://patch-diff.githubusercontent.com/raw/acquia/orca/pull/179.patch | git -C ../orca apply
           composer install -d ../orca
