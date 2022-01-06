@@ -59,6 +59,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
+          tools: composer:v2.1.14
           coverage: xdebug2
 
       - name: Before install
