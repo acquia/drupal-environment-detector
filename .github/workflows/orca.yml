@@ -62,7 +62,9 @@ jobs:
           coverage: xdebug2
 
       - name: Before install
-        run: composer create-project --no-dev acquia/orca ../orca "$ORCA_VERSION"
+        run: |
+          composer create-project --no-dev acquia/orca ../orca "$ORCA_VERSION"
+          ../orca/bin/ci/before_install.sh
 
       - name: Install
         run: ../orca/bin/ci/install.sh
