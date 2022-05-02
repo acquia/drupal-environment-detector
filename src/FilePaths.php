@@ -46,7 +46,7 @@ class FilePaths {
    *   The path to sites.json.
    */
   public static function acsfSitesJson(string $ah_group, string $ah_env) {
-    return "/mnt/files/$ah_group.$ah_env/files-private/sites.json";
+    return "/var/www/site-php/$ah_group.$ah_env/multisite-config.json";
   }
 
   /**
