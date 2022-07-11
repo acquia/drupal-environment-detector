@@ -27,10 +27,7 @@
         "branch-alias": {
             "dev-master": "1.x-dev"
         },
-        "phpcodesniffer-search-depth": "4",
-        "violinist": {
-            "allow_updates_beyond_constraint": 0
-        }
+        "phpcodesniffer-search-depth": "4"
     },
     "autoload": {
         "psr-4": {
