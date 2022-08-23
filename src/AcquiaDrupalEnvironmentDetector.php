@@ -10,7 +10,7 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is AH env.
    */
-  public static function isAhEnv() {
+  public static function isAhEnv(): bool {
     return (bool) self::getAhEnv();
   }
 
@@ -19,9 +19,9 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * Roughly duplicates the detection logic implemented by the ACSF module.
    *
-   * @param mixed $ah_group
+   * @param string|null $ah_group
    *   The Acquia Hosting site / group name (e.g. my_subscription).
-   * @param mixed $ah_env
+   * @param string|null $ah_env
    *   The Acquia Hosting environment name (e.g. 01dev).
    *
    * @return bool
@@ -29,7 +29,7 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * @see https://git.drupalcode.org/project/acsf/blob/8.x-2.62/acsf_init/lib/sites/default/acsf.settings.php#L14
    */
-  public static function isAcsfEnv($ah_group = NULL, $ah_env = NULL) {
+  public static function isAcsfEnv(string $ah_group = NULL, string $ah_env = NULL): bool {
     if (is_null($ah_group)) {
       $ah_group = self::getAhGroup();
     }
@@ -54,7 +54,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if prod, FALSE otherwise.
    */
-  public static function isAhProdEnv($ah_env = NULL) {
+  public static function isAhProdEnv(string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -68,9 +68,9 @@ class AcquiaDrupalEnvironmentDetector {
    *   Environment machine name.
    *
    * @return bool
-   *   TRUE if stage, FALSE otherwise.
+   *   TRUE if 'stage', FALSE otherwise.
    */
-  public static function isAhStageEnv($ah_env = NULL) {
+  public static function isAhStageEnv(string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -83,10 +83,10 @@ class AcquiaDrupalEnvironmentDetector {
    * @param string|null $ah_env
    *   Environment machine name.
    *
-   * @return false|int
+   * @return bool
    *   TRUE if dev, FALSE otherwise.
    */
-  public static function isAhDevEnv($ah_env = NULL) {
+  public static function isAhDevEnv(string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -99,10 +99,10 @@ class AcquiaDrupalEnvironmentDetector {
    * @param string|null $ah_env
    *   Environment machine name.
    *
-   * @return false|int
+   * @return bool
    *   TRUE if ODE, FALSE otherwise.
    */
-  public static function isAhOdeEnv($ah_env = NULL) {
+  public static function isAhOdeEnv(string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -118,7 +118,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if IDE, FALSE otherwise.
    */
-  public static function isAhIdeEnv($ah_env = NULL) {
+  public static function isAhIdeEnv(string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -130,8 +130,8 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * The devcloud realm includes Acquia Cloud Professional (ACP).
    */
-  public static function isAhDevCloud() {
-    return self::getAhRealm() == 'devcloud';
+  public static function isAhDevCloud(): bool {
+    return self::getAhRealm() === 'devcloud';
   }
 
   /**
@@ -140,7 +140,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return string
    *   Site group (usually a customer name).
    */
-  public static function getAhGroup() {
+  public static function getAhGroup(): string {
     return getenv('AH_SITE_GROUP');
   }
 
@@ -150,7 +150,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return string
    *   Environment name (e.g. dev, stage, prod).
    */
-  public static function getAhEnv() {
+  public static function getAhEnv(): string {
     return getenv('AH_SITE_ENVIRONMENT');
   }
 
@@ -160,21 +160,21 @@ class AcquiaDrupalEnvironmentDetector {
    * @return string
    *   Realm name (e.g. prod, gardens).
    */
-  public static function getAhRealm() {
+  public static function getAhRealm(): string {
     return getenv('AH_REALM');
   }
 
   /**
    * Get AH non production.
    */
-  public static function getAhNonProduction() {
+  public static function getAhNonProduction(): string {
     return getenv('AH_NON_PRODUCTION');
   }
 
   /**
    * Get AH application UUID.
    */
-  public static function getAhApplicationUuid() {
+  public static function getAhApplicationUuid(): string {
     return getenv('AH_APPLICATION_UUID');
   }
 
@@ -186,7 +186,7 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * @see https://docs.acquia.com/acquia-cloud/manage/files/about/
    */
-  public static function getAhFilesRoot() {
+  public static function getAhFilesRoot(): string {
     return FilePaths::ahFilesRoot(self::getAhGroup(), self::getAhEnv());
   }
 
@@ -196,8 +196,9 @@ class AcquiaDrupalEnvironmentDetector {
    * @return string|null
    *   ACSF db name.
    */
-  public static function getAcsfDbName() {
-    return isset($GLOBALS['gardens_site_settings']) && self::isAcsfEnv() ? $GLOBALS['gardens_site_settings']['conf']['acsf_db_name'] : NULL;
+  public static function getAcsfDbName(): ?string {
+    $gardens_site_settings = getenv('gardens_site_settings');
+    return is_array($gardens_site_settings) && self::isAcsfEnv() ? $gardens_site_settings['conf']['acsf_db_name'] : NULL;
   }
 
   /**
@@ -214,7 +215,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return string|null
    *   Site name.
    */
-  public static function getSiteName($site_path) {
+  public static function getSiteName(string $site_path): ?string {
     if (self::isAcsfEnv()) {
       return self::getAcsfDbName();
     }
@@ -225,28 +226,28 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is this a Lando environment using the Acquia recipe.
    */
-  public static function isAcquiaLandoEnv() {
+  public static function isAcquiaLandoEnv(): bool {
     return getenv('AH_SITE_ENVIRONMENT') === 'LANDO';
   }
 
   /**
    * Is this a Lando environment.
    */
-  public static function isLandoEnv() {
+  public static function isLandoEnv(): bool {
     return getenv('LANDO') === 'ON';
   }
 
   /**
    * Get Lando info.
    */
-  public static function getLandoInfo() {
+  public static function getLandoInfo(): string {
     return getenv('LANDO_INFO');
   }
 
   /**
    * If this isn't a Cloud environment, assume it's local.
    */
-  public static function isLocalEnv() {
+  public static function isLocalEnv(): bool {
     return !self::isAhEnv() || self::isAcquiaLandoEnv();
   }
 

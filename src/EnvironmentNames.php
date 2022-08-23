@@ -18,7 +18,7 @@ class EnvironmentNames {
    * @return bool
    *   TRUE if prod, FALSE otherwise.
    */
-  public static function isAhProdEnv($ah_env) {
+  public static function isAhProdEnv(string $ah_env): bool {
     // ACE prod is 'prod'; ACSF can be '01live', '02live', ...
     return $ah_env === 'prod' || preg_match('/^\d*live$/', $ah_env);
   }
@@ -34,9 +34,9 @@ class EnvironmentNames {
    *   Environment machine name.
    *
    * @return bool
-   *   TRUE if stage, FALSE otherwise.
+   *   TRUE if 'stage', FALSE otherwise.
    */
-  public static function isAhStageEnv($ah_env) {
+  public static function isAhStageEnv(string $ah_env): bool {
     // ACE staging is 'test', 'stg', or 'stage'; ACSF is '01test', '02test', ...
     return preg_match('/^\d*test$/', $ah_env) || $ah_env === 'stg' || $ah_env === 'stage';
   }
@@ -47,12 +47,12 @@ class EnvironmentNames {
    * @param string $ah_env
    *   Environment machine name.
    *
-   * @return false|int
+   * @return bool
    *   TRUE if dev, FALSE otherwise.
    */
-  public static function isAhDevEnv($ah_env) {
+  public static function isAhDevEnv(string $ah_env): bool {
     // ACE dev is 'dev', 'dev1', ...; ACSF dev is '01dev', '02dev', ...
-    return (preg_match('/^\d*dev\d*$/', $ah_env));
+    return (bool) preg_match('/^\d*dev\d*$/', $ah_env);
   }
 
   /**
@@ -61,12 +61,12 @@ class EnvironmentNames {
    * @param string $ah_env
    *   Environment machine name.
    *
-   * @return false|int
+   * @return bool
    *   TRUE if ODE, FALSE otherwise.
    */
-  public static function isAhOdeEnv($ah_env) {
+  public static function isAhOdeEnv(string $ah_env): bool {
     // CDEs (formerly 'ODEs') can be 'ode1', 'ode2', ...
-    return (preg_match('/^ode\d*$/', $ah_env));
+    return (bool) preg_match('/^ode\d*$/', $ah_env);
   }
 
   /**
@@ -78,7 +78,7 @@ class EnvironmentNames {
    * @return bool
    *   TRUE if IDE, FALSE otherwise.
    */
-  public static function isAhIdeEnv($ah_env) {
+  public static function isAhIdeEnv(string $ah_env): bool {
     return strtolower($ah_env) === 'ide';
   }
 
