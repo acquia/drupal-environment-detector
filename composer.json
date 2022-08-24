@@ -23,6 +23,9 @@
         },
         "sort-packages": true
     },
+    "conflict": {
+        "acquia/blt": "<13.5.2"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
