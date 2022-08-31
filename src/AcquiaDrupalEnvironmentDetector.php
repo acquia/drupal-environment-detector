@@ -197,8 +197,10 @@ class AcquiaDrupalEnvironmentDetector {
    *   ACSF db name.
    */
   public static function getAcsfDbName(): ?string {
-    $gardens_site_settings = getenv('gardens_site_settings');
-    return is_array($gardens_site_settings) && self::isAcsfEnv() ? $gardens_site_settings['conf']['acsf_db_name'] : NULL;
+    // phpcs:disable
+    // note that ACSF uses $GLOBALS and despite coding standards we must maintain this logic.
+    return isset($GLOBALS['gardens_site_settings']) && self::isAcsfEnv() ? $GLOBALS['gardens_site_settings']['conf']['acsf_db_name'] : NULL;
+    // phpcs:enable
   }
 
   /**
