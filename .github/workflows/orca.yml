@@ -54,6 +54,18 @@ jobs:
           - orca-job: ISOLATED_TEST_ON_CURRENT
             php-version: "7.4"
             coveralls-enable: "TRUE"
+          - orca-job: ISOLATED_TEST_ON_NEXT_MAJOR_LATEST_MINOR_DEV
+            php-version: "8.1"
+            coveralls-enable: "FALSE"
+          - orca-job: INTEGRATED_TEST_ON_NEXT_MAJOR_LATEST_MINOR_DEV
+            php-version: "8.1"
+            coveralls-enable: "FALSE"
+          - orca-job: ISOLATED_TEST_ON_NEXT_MAJOR_LATEST_MINOR_BETA_OR_LATER
+            php-version: "8.1"
+            coveralls-enable: "FALSE"
+          - orca-job: INTEGRATED_TEST_ON_NEXT_MAJOR_LATEST_MINOR_BETA_OR_LATER
+            php-version: "8.1"
+            coveralls-enable: "FALSE"
 
     steps:
       - uses: actions/checkout@v2
