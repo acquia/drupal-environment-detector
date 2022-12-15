@@ -24,7 +24,7 @@
         "sort-packages": true
     },
     "conflict": {
-        "acquia/blt": "<13.5.2"
+        "acquia/blt": ">=12.0.0 <13.5.2"
     },
     "extra": {
         "branch-alias": {
