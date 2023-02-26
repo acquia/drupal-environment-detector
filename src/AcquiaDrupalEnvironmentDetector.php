@@ -253,4 +253,13 @@ class AcquiaDrupalEnvironmentDetector {
     return !self::isAhEnv() || self::isAcquiaLandoEnv();
   }
 
+  /**
+   * Is this a Code Studio environment.
+   */
+  public static function isCodeStudioEnv(): bool {
+    $gitlab_job_id = getenv('CI_JOB_ID');
+    $gitlab_token = getenv('ACQUIA_GLAB_TOKEN_NAME');
+    return (bool) (!empty($gitlab_job_id) && !empty($gitlab_token));
+  }
+
 }
