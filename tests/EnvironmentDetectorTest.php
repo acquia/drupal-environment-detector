@@ -117,4 +117,55 @@ class EnvironmentDetectorTest extends TestCase {
     $this::assertTrue(AcquiaDrupalEnvironmentDetector::isLandoEnv());
   }
 
+  /**
+   * Tests EnvironmentDetector::isCodeStudioEnv().
+   *
+   * @param string $gitlab_ci_job_id
+   *   Git lab CI job id.
+   * @param string $gitlab_token
+   *   Git lab CI token.
+   * @param bool $expected_value
+   *   Expected outcome whether code studio pipeline or not.
+   *
+   * @dataProvider providerTestIsCodeStudio
+   */
+  public function testIsCodeStudioEnv($gitlab_ci_job_id, $gitlab_token, $expected_value) {
+    putenv("CI_JOB_ID=$gitlab_ci_job_id");
+    putenv("ACQUIA_GLAB_TOKEN_NAME=$gitlab_token");
+    $this::assertEquals($expected_value, AcquiaDrupalEnvironmentDetector::isCodeStudioEnv());
+    putenv("CI_JOB_ID");
+    putenv("ACQUIA_GLAB_TOKEN_NAME");
+  }
+
+  /**
+   * Provides values to testIsCodeStudioEnv tests.
+   *
+   * @return array
+   *   An array of values to test, environment variables value with outcome.
+   */
+  public function providerTestIsCodeStudio() {
+    return [
+      [
+        'TestJobId',
+        'TestToken',
+        TRUE,
+      ],
+      [
+        '',
+        'TestToken',
+        FALSE,
+      ],
+      [
+        'TestJobId',
+        '',
+        FALSE,
+      ],
+      [
+        '',
+        '',
+        FALSE,
+      ],
+    ];
+  }
+
 }
