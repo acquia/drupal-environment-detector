@@ -148,7 +148,9 @@ class AcquiaDrupalEnvironmentDetector {
    * Get Acquia hosting environment.
    *
    * @return string
-   *   Environment name (e.g. dev, stage, prod).
+   *   Environment name (typically dev, test, or prod).
+   *
+   * @see https://docs.acquia.com/cloud-platform/develop/env-variable/#available-environment-variables
    */
   public static function getAhEnv(): string {
     return getenv('AH_SITE_ENVIRONMENT');
@@ -159,6 +161,8 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * @return string
    *   Realm name (e.g. prod, gardens).
+   *
+   * @see https://docs.acquia.com/cloud-platform/develop/env-variable/#available-environment-variables
    */
   public static function getAhRealm(): string {
     return getenv('AH_REALM');
