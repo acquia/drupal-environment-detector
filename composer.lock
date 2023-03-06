@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "255b92729fa08bf4e58ebb3c7acdc2e0",
+    "content-hash": "e6fade27cc3e75a234c94177443e8b84",
     "packages": [],
     "packages-dev": [
         {
             "name": "acquia/coding-standards",
-            "version": "v1.0.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acquia/coding-standards-php.git",
-                "reference": "4e1a775e6693b38d747a769ea71b7f104e2e9780"
+                "reference": "bb52b780a00ca7586e8b2e502e09dc53c5e90a60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acquia/coding-standards-php/zipball/4e1a775e6693b38d747a769ea71b7f104e2e9780",
-                "reference": "4e1a775e6693b38d747a769ea71b7f104e2e9780",
+                "url": "https://api.github.com/repos/acquia/coding-standards-php/zipball/bb52b780a00ca7586e8b2e502e09dc53c5e90a60",
+                "reference": "bb52b780a00ca7586e8b2e502e09dc53c5e90a60",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,7 @@
             "type": "phpcodesniffer-standard",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.x-dev"
+                    "dev-develop": "2.x-dev"
                 }
             },
             "autoload": {
@@ -57,13 +57,14 @@
             "keywords": [
                 "drupal",
                 "phpcs",
-                "standards"
+                "standards",
+                "static analysis"
             ],
             "support": {
                 "issues": "https://github.com/acquia/coding-standards/issues",
                 "source": "https://github.com/acquia/coding-standards"
             },
-            "time": "2022-08-22T14:35:53+00:00"
+            "time": "2023-03-06T17:49:20+00:00"
         },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -218,8 +219,14 @@
             "version": "8.3.17",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/coder.git",
+                "url": "https://github.com/pfrenssen/coder.git",
                 "reference": "1c4662337418ab88c9ddf40348f0638e35d49182"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pfrenssen/coder/zipball/1c4662337418ab88c9ddf40348f0638e35d49182",
+                "reference": "1c4662337418ab88c9ddf40348f0638e35d49182",
+                "shasum": ""
             },
             "require": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1 || ^1.0.0",
