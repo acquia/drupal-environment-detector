@@ -4,13 +4,20 @@ on:
   push:
     branches:
       - main
-  pull_request_target:
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-
-permissions:
-  contents: write
-  pull-requests: write
+  workflow_run:
+    types:
+      - "completed"
+    workflows:
+      - "Auto-label pull requests"
+      - "Auto-merge dependency updates"
 
 jobs:
-  call-workflow:
-    uses: acquia/cli/.github/workflows/release-drafter.yml@main
+  update_release_draft:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
