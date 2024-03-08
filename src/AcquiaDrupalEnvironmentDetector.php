@@ -266,4 +266,37 @@ class AcquiaDrupalEnvironmentDetector {
     return (bool) (!empty($gitlab_job_id) && !empty($gitlab_token));
   }
 
+  /**
+   * Helper function to get environment Group.
+   *
+   * @param string $ah_env
+   *   Environment machine name.
+   *
+   * @return string
+   *   The environment Group.
+   */
+  public static function getAhEnvGroup(string $ah_env): string {
+    if (EnvironmentNames::isAhProdEnv($ah_env)) {
+      return 'prod';
+    }
+    elseif (EnvironmentNames::isAhStageEnv($ah_env)) {
+      return 'stage';
+    }
+    elseif (EnvironmentNames::isAhDevEnv($ah_env)) {
+      return 'dev';
+    }
+    elseif (EnvironmentNames::isAhOdeEnv($ah_env)) {
+      return 'ode';
+    }
+    elseif (EnvironmentNames::isAhIdeEnv($ah_env)) {
+      return 'ide';
+    }
+    elseif (self::isAhEnv($ah_env)) {
+      return 'other_acquia_env';
+    }
+    else {
+      return 'non_acquia_env';
+    }
+  }
+
 }
