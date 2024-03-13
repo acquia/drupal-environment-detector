@@ -78,9 +78,24 @@ class EnvironmentDetectorTest extends TestCase {
    *
    * @dataProvider providerTestIsEnv
    */
-  public function testIsAcquiaLandoEnv($ah_site_env, $expected_env) {
+  public function testIsAcquiaLandoEnv() {
+    putenv("AH_SITE_ENVIRONMENT=LANDO");
+    $this::assertEquals('lando', AcquiaDrupalEnvironmentDetector::isAcquiaLandoEnv());
+  }
+
+  /**
+   * Tests EnvironmentDetector::isAcquiaLandoEnv().
+   *
+   * @param string $ah_site_env
+   *   The name of the site environment.
+   * @param string $expected_env
+   *   Environment type.
+   *
+   * @dataProvider providerTestIsEnv
+   */
+  public function testGetAhEnvGroup($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
-    $this::assertEquals($expected_env === 'lando', AcquiaDrupalEnvironmentDetector::isAcquiaLandoEnv());
+    $this::assertEquals($expected_env, AcquiaDrupalEnvironmentDetector::getAhEnvGroup($ah_site_env));
   }
 
   /**
@@ -105,7 +120,8 @@ class EnvironmentDetectorTest extends TestCase {
       ['02live', 'prod'],
       ['ode1', 'ode'],
       ['ode2', 'ode'],
-      ['LANDO', 'lando'],
+      ['01update', 'other_acquia_env'],
+      ['', 'non_acquia_env'],
     ];
   }
 
