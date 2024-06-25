@@ -11,8 +11,7 @@
     ],
     "require-dev": {
         "acquia/coding-standards": "^2.0.0",
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-        "phpunit/phpunit": "^10"
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0"
     },
     "config": {
         "allow-plugins": {
