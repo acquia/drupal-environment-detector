@@ -1,0 +1,22 @@
+# When someone opens a public GitHub issue, this workflow will create a corresponding
+# Jira ticket and update the issue title to reference the Jira ticket number.
+# When someone closes a public GitHub issue, this workflow will comment on the linked
+# Jira ticket indicating that the issue was closed.
+# Your Jira project key must match the repository name.
+name: Sync GitHub issues to Jira
+on:
+  issues:
+    types:
+      - opened
+      - closed
+permissions:
+  issues: write
+jobs:
+  jira:
+    uses: acquia/.github/.github/workflows/jira.yml@main
+    # Set the JIRA* secrets in your repository settings. You will need to create an API
+    # token from your Jira user profile.
+    secrets:
+      jira-user-email: ${{ secrets.JIRA_USER_EMAIL }}
+      jira-api-token: ${{ secrets.JIRA_API_TOKEN }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
