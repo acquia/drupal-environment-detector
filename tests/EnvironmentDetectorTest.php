@@ -70,13 +70,6 @@ class EnvironmentDetectorTest extends TestCase {
 
   /**
    * Tests EnvironmentDetector::isAcquiaLandoEnv().
-   *
-   * @param string $ah_site_env
-   *   The name of the site environment.
-   * @param string $expected_env
-   *   Environment type.
-   *
-   * @dataProvider providerTestIsEnv
    */
   public function testIsAcquiaLandoEnv() {
     putenv("AH_SITE_ENVIRONMENT=LANDO");
