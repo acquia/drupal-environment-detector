@@ -20,3 +20,5 @@ jobs:
       jira-user-email: ${{ secrets.JIRA_USER_EMAIL }}
       jira-api-token: ${{ secrets.JIRA_API_TOKEN }}
       github-token: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      project_key: CLI
