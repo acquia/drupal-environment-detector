@@ -291,7 +291,7 @@ class AcquiaDrupalEnvironmentDetector {
     elseif (EnvironmentNames::isAhIdeEnv($ah_env)) {
       return 'ide';
     }
-    elseif (self::isAhEnv($ah_env)) {
+    elseif (self::isAhEnv()) {
       return 'other_acquia_env';
     }
     else {
