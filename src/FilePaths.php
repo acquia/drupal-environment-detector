@@ -26,8 +26,8 @@ class FilePaths {
       $site_name = $ah_group;
     }
 
-    // Acquia Cloud does not support periods in db names.
-    $site_name = str_replace('.', '_', $site_name);
+    // Acquia Cloud does not support periods or hyphens in db names.
+    $site_name = str_replace(['.', '-'], '_', $site_name);
 
     return "/var/www/site-php/$ah_group/$site_name-settings.inc";
   }
