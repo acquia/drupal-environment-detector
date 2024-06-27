@@ -13,25 +13,25 @@
         "acquia/coding-standards": "^2.0.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0"
     },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        },
-        "sort-packages": true
-    },
     "conflict": {
         "acquia/blt": ">=12.0.0 <13.5.2"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-main": "1.x-dev"
-        },
-        "phpcodesniffer-search-depth": "4"
     },
     "autoload": {
         "psr-4": {
             "Acquia\\DrupalEnvironmentDetector\\": "src/",
             "Acquia\\DrupalEnvironmentDetector\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
+        "phpcodesniffer-search-depth": "4"
     }
 }
