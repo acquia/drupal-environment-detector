@@ -48,7 +48,7 @@ jobs:
           - LOOSE_DEPRECATED_CODE_SCAN
         php-version: [ "8.3" ]
         coveralls-enable: [ "FALSE" ]
-        orca-version: [ "^4" ]
+        orca-version: [ "^5" ]
         include:
 
           - orca-job: ISOLATED_TEST_ON_CURRENT
@@ -68,19 +68,14 @@ jobs:
           #   php-version: "8.3"
 
           - orca-job: INTEGRATED_TEST_ON_LATEST_EOL_MAJOR
-            php-version: "8.0"
-            coveralls-enable: "FALSE"
-            orca-version: "^3"
-
-          - orca-job: INTEGRATED_TEST_ON_LATEST_EOL_MAJOR
             php-version: "8.1"
             coveralls-enable: "FALSE"
-            orca-version: "^4"
+            orca-version: "^5"
 
           - orca-job: INTEGRATED_TEST_ON_OLDEST_SUPPORTED
             php-version: "8.1"
             coveralls-enable: "FALSE"
-            orca-version: "^4"
+            orca-version: "^5"
 
     steps:
       - uses: actions/checkout@v2
