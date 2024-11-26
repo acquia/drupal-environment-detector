@@ -29,7 +29,7 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * @see https://git.drupalcode.org/project/acsf/blob/8.x-2.62/acsf_init/lib/sites/default/acsf.settings.php#L14
    */
-  public static function isAcsfEnv(string $ah_group = NULL, string $ah_env = NULL): bool {
+  public static function isAcsfEnv(?string $ah_group = NULL, ?string $ah_env = NULL): bool {
     if (is_null($ah_group)) {
       $ah_group = self::getAhGroup();
     }
@@ -54,7 +54,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if prod, FALSE otherwise.
    */
-  public static function isAhProdEnv(string $ah_env = NULL): bool {
+  public static function isAhProdEnv(?string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -70,7 +70,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if 'stage', FALSE otherwise.
    */
-  public static function isAhStageEnv(string $ah_env = NULL): bool {
+  public static function isAhStageEnv(?string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -86,7 +86,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if dev, FALSE otherwise.
    */
-  public static function isAhDevEnv(string $ah_env = NULL): bool {
+  public static function isAhDevEnv(?string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -102,7 +102,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if ODE, FALSE otherwise.
    */
-  public static function isAhOdeEnv(string $ah_env = NULL): bool {
+  public static function isAhOdeEnv(?string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
@@ -118,7 +118,7 @@ class AcquiaDrupalEnvironmentDetector {
    * @return bool
    *   TRUE if IDE, FALSE otherwise.
    */
-  public static function isAhIdeEnv(string $ah_env = NULL): bool {
+  public static function isAhIdeEnv(?string $ah_env = NULL): bool {
     if (is_null($ah_env)) {
       $ah_env = self::getAhEnv();
     }
