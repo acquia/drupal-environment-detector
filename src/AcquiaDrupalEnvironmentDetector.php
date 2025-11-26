@@ -46,6 +46,16 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
+   * Check if this is an MEO env.
+   *
+   * @return bool
+   *   TRUE if this is a MEO environment, FALSE otherwise.
+   */
+  public static function isMeoEnv(): bool {
+    return (getAhEnvironmentType() === 'meo');
+  }
+
+  /**
    * Is this a prod environment on Acquia hosting.
    *
    * @param string|null $ah_env
@@ -183,6 +193,20 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
+   * Get AH environment type (only available on MEO).
+   */
+  public static function getAhEnvironmentType(): string {
+    return getenv('AH_ENVIRONMENT_TYPE');
+  }
+
+  /**
+   * Get AH drupal site name (only available on MEO).
+   */
+  public static function getAhDrupalSiteName(): string {
+    return getenv('AH_DRUPAL_SITE_NAME');
+  }
+
+  /**
    * The path to the persistent file storage mount.
    *
    * It is used to store Drupal public and private files, but is only a common
@@ -224,6 +248,9 @@ class AcquiaDrupalEnvironmentDetector {
   public static function getSiteName(string $site_path): ?string {
     if (self::isAcsfEnv()) {
       return self::getAcsfDbName();
+    }
+    elseif (self::isMeoEnv()) {
+      return self::getAhDrupalSiteName();
     }
 
     return str_replace('sites/', '', $site_path);
