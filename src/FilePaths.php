@@ -50,6 +50,24 @@ class FilePaths {
   }
 
   /**
+   * Path to the MEO common settings include file.
+   *
+   * Acquia MEO environments use a single shared settings include for all sites
+   * in the subscription, dynamically loading the correct database credentials.
+   *
+   * @param string $ah_group
+   *   The Acquia Hosting site group (AH_SITE_GROUP).
+   *
+   * @return string
+   *   The path to the MEO settings common include file.
+   *
+   * @see https://docs.acquia.com/acquia-cloud-platform/add-ons/multi-experience-operations/managing-sitesphp-and-settingsphp
+   */
+  public static function ahMeoSettingsFile(string $ah_group): string {
+    return "/var/www/site-php/$ah_group/$ah_group-settings.common.inc";
+  }
+
+  /**
    * The path to the persistent file storage mount.
    *
    * It is used to store Drupal public and private files, but is only a common

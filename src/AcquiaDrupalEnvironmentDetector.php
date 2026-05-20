@@ -135,6 +135,19 @@ class AcquiaDrupalEnvironmentDetector {
   }
 
   /**
+   * Is this an Acquia Multi-Experience Operations (MEO) environment.
+   *
+   * MEO environments expose the AH_CODEBASE_UUID environment variable.
+   * They require a different settings include path than standard ACE:
+   * /var/www/site-php/{AH_SITE_GROUP}/{AH_SITE_GROUP}-settings.common.inc
+   *
+   * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahMeoSettingsFile()
+   */
+  public static function isAcquiaMeoEnv(): bool {
+    return (bool) getenv('AH_CODEBASE_UUID');
+  }
+
+  /**
    * Get Acquia hosting site group.
    *
    * @return string
@@ -290,6 +303,9 @@ class AcquiaDrupalEnvironmentDetector {
     }
     elseif (EnvironmentNames::isAhIdeEnv($ah_env)) {
       return 'ide';
+    }
+    elseif (self::isAcquiaMeoEnv()) {
+      return 'meo';
     }
     elseif (self::isAhEnv()) {
       return 'other_acquia_env';
