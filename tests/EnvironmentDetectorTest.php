@@ -173,41 +173,73 @@ class EnvironmentDetectorTest extends TestCase {
   }
 
   /**
-   * Tests EnvironmentDetector::isAcquiaMeoEnv().
+   * Tests EnvironmentDetector::isAhMeoEnv().
    */
   public function testIsAcquiaMeoEnvTrue() {
-    putenv('AH_CODEBASE_UUID=abc-123-uuid');
-    $this::assertTrue(AcquiaDrupalEnvironmentDetector::isAcquiaMeoEnv());
-    putenv('AH_CODEBASE_UUID');
+    putenv('AH_ENVIRONMENT_TYPE=meo');
+    $this::assertTrue(AcquiaDrupalEnvironmentDetector::isAhMeoEnv());
+    putenv('AH_ENVIRONMENT_TYPE');
   }
 
   /**
-   * Tests EnvironmentDetector::isAcquiaMeoEnv() when not set.
+   * Tests EnvironmentDetector::isAhMeoEnv() when not set.
    */
   public function testIsAcquiaMeoEnvFalse() {
-    putenv('AH_CODEBASE_UUID');
-    $this::assertFalse(AcquiaDrupalEnvironmentDetector::isAcquiaMeoEnv());
+    putenv('AH_ENVIRONMENT_TYPE');
+    $this::assertFalse(AcquiaDrupalEnvironmentDetector::isAhMeoEnv());
   }
 
   /**
    * Tests that getAhEnvGroup() returns 'meo' in a MEO environment.
    */
   public function testGetAhEnvGroupMeo() {
-    putenv('AH_CODEBASE_UUID=abc-123-uuid');
+    putenv('AH_ENVIRONMENT_TYPE=meo');
     // Use a non-standard env name so only the MEO branch matches.
     $this::assertEquals('meo', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('meoprod'));
-    putenv('AH_CODEBASE_UUID');
+    putenv('AH_ENVIRONMENT_TYPE');
   }
 
   /**
-   * Tests FilePaths::ahMeoSettingsFile().
+   * Tests FilePaths::ahSettingsFile() returns the MEO common include in MEO.
    */
-  public function testAhMeoSettingsFile() {
+  public function testAhSettingsFileReturnsMeoPathInMeoEnv() {
+    putenv('AH_ENVIRONMENT_TYPE=meo');
     $this::assertEquals(
       '/var/www/site-php/mysite/mysite-settings.common.inc',
-      \Acquia\DrupalEnvironmentDetector\FilePaths::ahMeoSettingsFile('mysite')
+      \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile('mysite', 'default')
+    );
+    putenv('AH_ENVIRONMENT_TYPE');
+  }
+
+  /**
+   * Tests FilePaths::ahSettingsFile() returns the standard path outside MEO.
+   */
+  public function testAhSettingsFileReturnsStandardPathOutsideMeo() {
+    putenv('AH_ENVIRONMENT_TYPE');
+    $this::assertEquals(
+      '/var/www/site-php/mysite/mysite-settings.inc',
+      \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile('mysite', 'default')
     );
   }
 
-}
+  /**
+   * Tests FilePaths::ahSitesFile() returns path in MEO environment.
+   */
+  public function testAhSitesFileInMeoEnv() {
+    putenv('AH_ENVIRONMENT_TYPE=meo');
+    $this::assertEquals(
+      '/var/www/site-php/mysite/mysite-sites.inc',
+      \Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile('mysite')
+    );
+    putenv('AH_ENVIRONMENT_TYPE');
+  }
 
+  /**
+   * Tests FilePaths::ahSitesFile() returns NULL outside MEO.
+   */
+  public function testAhSitesFileOutsideMeoEnv() {
+    putenv('AH_ENVIRONMENT_TYPE');
+    $this::assertNull(\Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile('mysite'));
+  }
+
+}

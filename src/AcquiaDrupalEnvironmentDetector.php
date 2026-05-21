@@ -129,6 +129,8 @@ class AcquiaDrupalEnvironmentDetector {
    * Is AH devcloud.
    *
    * The devcloud realm includes Acquia Cloud Professional (ACP).
+   * Note: this does NOT include Acquia MEO environments; use isAhMeoEnv()
+   * for those.
    */
   public static function isAhDevCloud(): bool {
     return self::getAhRealm() === 'devcloud';
@@ -137,14 +139,15 @@ class AcquiaDrupalEnvironmentDetector {
   /**
    * Is this an Acquia Multi-Experience Operations (MEO) environment.
    *
-   * MEO environments expose the AH_CODEBASE_UUID environment variable.
-   * They require a different settings include path than standard ACE:
+   * MEO environments set AH_ENVIRONMENT_TYPE to 'meo'. They require a
+   * different settings include path than standard ACE environments:
    * /var/www/site-php/{AH_SITE_GROUP}/{AH_SITE_GROUP}-settings.common.inc
    *
-   * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahMeoSettingsFile()
+   * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile()
+   * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile()
    */
-  public static function isAcquiaMeoEnv(): bool {
-    return (bool) getenv('AH_CODEBASE_UUID');
+  public static function isAhMeoEnv(): bool {
+    return getenv('AH_ENVIRONMENT_TYPE') === 'meo';
   }
 
   /**
@@ -304,7 +307,7 @@ class AcquiaDrupalEnvironmentDetector {
     elseif (EnvironmentNames::isAhIdeEnv($ah_env)) {
       return 'ide';
     }
-    elseif (self::isAcquiaMeoEnv()) {
+    elseif (self::isAhMeoEnv()) {
       return 'meo';
     }
     elseif (self::isAhEnv()) {
