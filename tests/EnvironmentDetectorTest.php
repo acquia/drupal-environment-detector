@@ -1,6 +1,7 @@
 <?php
 
 use Acquia\DrupalEnvironmentDetector\AcquiaDrupalEnvironmentDetector;
+use Acquia\DrupalEnvironmentDetector\FilePaths;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -191,10 +192,15 @@ class EnvironmentDetectorTest extends TestCase {
 
   /**
    * Tests that getAhEnvGroup() returns 'meo' in a MEO environment.
+   *
+   * Even when $ah_env matches a standard name (e.g. 'prod'), MEO must win
+   * because AH_ENVIRONMENT_TYPE takes precedence over $ah_env naming.
    */
   public function testGetAhEnvGroupMeo() {
     putenv('AH_ENVIRONMENT_TYPE=meo');
-    // Use a non-standard env name so only the MEO branch matches.
+    // Standard env name that would normally return 'prod' — MEO must take precedence.
+    $this::assertEquals('meo', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('prod'));
+    // Also verify with a non-standard env name.
     $this::assertEquals('meo', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('meoprod'));
     putenv('AH_ENVIRONMENT_TYPE');
   }
@@ -206,7 +212,7 @@ class EnvironmentDetectorTest extends TestCase {
     putenv('AH_ENVIRONMENT_TYPE=meo');
     $this::assertEquals(
       '/var/www/site-php/mysite/mysite-settings.common.inc',
-      \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile('mysite', 'default')
+      FilePaths::ahSettingsFile('mysite', 'default')
     );
     putenv('AH_ENVIRONMENT_TYPE');
   }
@@ -218,7 +224,7 @@ class EnvironmentDetectorTest extends TestCase {
     putenv('AH_ENVIRONMENT_TYPE');
     $this::assertEquals(
       '/var/www/site-php/mysite/mysite-settings.inc',
-      \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile('mysite', 'default')
+      FilePaths::ahSettingsFile('mysite', 'default')
     );
   }
 
@@ -229,7 +235,7 @@ class EnvironmentDetectorTest extends TestCase {
     putenv('AH_ENVIRONMENT_TYPE=meo');
     $this::assertEquals(
       '/var/www/site-php/mysite/mysite-sites.inc',
-      \Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile('mysite')
+      FilePaths::ahSitesFile('mysite')
     );
     putenv('AH_ENVIRONMENT_TYPE');
   }
@@ -239,7 +245,7 @@ class EnvironmentDetectorTest extends TestCase {
    */
   public function testAhSitesFileOutsideMeoEnv() {
     putenv('AH_ENVIRONMENT_TYPE');
-    $this::assertNull(\Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile('mysite'));
+    $this::assertNull(FilePaths::ahSitesFile('mysite'));
   }
 
 }
