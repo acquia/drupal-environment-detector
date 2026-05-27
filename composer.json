@@ -11,7 +11,9 @@
     ],
     "require-dev": {
         "acquia/coding-standards": "^3.0.1",
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0"
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^10 || ^11"
     },
     "conflict": {
         "acquia/blt": ">=12.0.0 <13.5.2"
@@ -21,6 +23,11 @@
             "Acquia\\DrupalEnvironmentDetector\\": "src/",
             "Acquia\\DrupalEnvironmentDetector\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpstan": "phpstan analyse",
+        "phpunit": "phpunit"
     },
     "config": {
         "allow-plugins": {

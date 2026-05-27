@@ -1,6 +1,7 @@
 <?php
 
 use Acquia\DrupalEnvironmentDetector\AcquiaDrupalEnvironmentDetector;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,9 +16,8 @@ class EnvironmentDetectorTest extends TestCase {
    *   The name of the site environment.
    * @param string $expected_env
    *   Environment type.
-   *
-   * @dataProvider providerTestIsEnv
    */
+  #[DataProvider('providerTestIsEnv')]
   public function testIsAhDevEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
     $this::assertEquals($expected_env === 'dev', AcquiaDrupalEnvironmentDetector::isAhDevEnv());
@@ -30,9 +30,8 @@ class EnvironmentDetectorTest extends TestCase {
    *   The name of the site environment.
    * @param string $expected_env
    *   Environment type.
-   *
-   * @dataProvider providerTestIsEnv
    */
+  #[DataProvider('providerTestIsEnv')]
   public function testIsAhStageEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
     $this::assertEquals($expected_env === 'stage', AcquiaDrupalEnvironmentDetector::isAhStageEnv());
@@ -45,9 +44,8 @@ class EnvironmentDetectorTest extends TestCase {
    *   The name of the site environment.
    * @param string $expected_env
    *   Environment type.
-   *
-   * @dataProvider providerTestIsEnv
    */
+  #[DataProvider('providerTestIsEnv')]
   public function testIsAhProdEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
     $this::assertEquals($expected_env === 'prod', AcquiaDrupalEnvironmentDetector::isAhProdEnv());
@@ -60,9 +58,8 @@ class EnvironmentDetectorTest extends TestCase {
    *   The name of the site environment.
    * @param string $expected_env
    *   Environment type.
-   *
-   * @dataProvider providerTestIsEnv
    */
+  #[DataProvider('providerTestIsEnv')]
   public function testIsAhOdeEnv($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
     $this::assertEquals($expected_env === 'ode', AcquiaDrupalEnvironmentDetector::isAhOdeEnv());
@@ -83,9 +80,8 @@ class EnvironmentDetectorTest extends TestCase {
    *   The name of the site environment.
    * @param string $expected_env
    *   Environment type.
-   *
-   * @dataProvider providerTestIsEnv
    */
+  #[DataProvider('providerTestIsEnv')]
   public function testGetAhEnvGroup($ah_site_env, $expected_env) {
     putenv("AH_SITE_ENVIRONMENT=$ah_site_env");
     $this::assertEquals($expected_env, AcquiaDrupalEnvironmentDetector::getAhEnvGroup($ah_site_env));
@@ -97,7 +93,7 @@ class EnvironmentDetectorTest extends TestCase {
    * @return array
    *   An array of values to test, environment name mapped to environment type.
    */
-  public function providerTestIsEnv() {
+  public static function providerTestIsEnv() {
     return [
       ['dev', 'dev'],
       ['dev1', 'dev'],
@@ -135,9 +131,8 @@ class EnvironmentDetectorTest extends TestCase {
    *   Git lab CI token.
    * @param bool $expected_value
    *   Expected outcome whether code studio pipeline or not.
-   *
-   * @dataProvider providerTestIsCodeStudio
    */
+  #[DataProvider('providerTestIsCodeStudio')]
   public function testIsCodeStudioEnv($gitlab_ci_job_id, $gitlab_token, $expected_value) {
     putenv("CI_JOB_ID=$gitlab_ci_job_id");
     putenv("ACQUIA_GLAB_TOKEN_NAME=$gitlab_token");
@@ -152,7 +147,7 @@ class EnvironmentDetectorTest extends TestCase {
    * @return array
    *   An array of values to test, environment variables value with outcome.
    */
-  public function providerTestIsCodeStudio() {
+  public static function providerTestIsCodeStudio() {
     return [
       [
         'TestJobId',
