@@ -191,17 +191,18 @@ class EnvironmentDetectorTest extends TestCase {
   }
 
   /**
-   * Tests that getAhEnvGroup() returns 'meo' in a MEO environment.
+   * Tests that getAhEnvGroup() returns the standard env group in a MEO environment.
    *
-   * Even when $ah_env matches a standard name (e.g. 'prod'), MEO must win
-   * because AH_ENVIRONMENT_TYPE takes precedence over $ah_env naming.
+   * MEO is an application type, not an environment type. MEO environments still
+   * have standard env types (prod, stage, dev), so getAhEnvGroup() must return
+   * those rather than 'meo'.
    */
   public function testGetAhEnvGroupMeo() {
     putenv('AH_ENVIRONMENT_TYPE=meo');
-    // Standard env name that would normally return 'prod' — MEO must take precedence.
-    $this::assertEquals('meo', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('prod'));
-    // Also verify with a non-standard env name.
-    $this::assertEquals('meo', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('meoprod'));
+    // MEO prod environment should still return 'prod'.
+    $this::assertEquals('prod', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('prod'));
+    // MEO stage environment should still return 'stage'.
+    $this::assertEquals('stage', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('stg'));
     putenv('AH_ENVIRONMENT_TYPE');
   }
 

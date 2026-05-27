@@ -292,10 +292,7 @@ class AcquiaDrupalEnvironmentDetector {
    *   The environment Group.
    */
   public static function getAhEnvGroup(string $ah_env): string {
-    if (self::isAhMeoEnv()) {
-      return 'meo';
-    }
-    elseif (EnvironmentNames::isAhProdEnv($ah_env)) {
+    if (EnvironmentNames::isAhProdEnv($ah_env)) {
       return 'prod';
     }
     elseif (EnvironmentNames::isAhStageEnv($ah_env)) {
