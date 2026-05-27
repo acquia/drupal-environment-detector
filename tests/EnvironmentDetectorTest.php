@@ -1,6 +1,7 @@
 <?php
 
 use Acquia\DrupalEnvironmentDetector\AcquiaDrupalEnvironmentDetector;
+use Acquia\DrupalEnvironmentDetector\FilePaths;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -74,7 +75,7 @@ class EnvironmentDetectorTest extends TestCase {
   }
 
   /**
-   * Tests EnvironmentDetector::isAcquiaLandoEnv().
+   * Tests EnvironmentDetector::getAhEnvGroup().
    *
    * @param string $ah_site_env
    *   The name of the site environment.
@@ -93,7 +94,7 @@ class EnvironmentDetectorTest extends TestCase {
    * @return array
    *   An array of values to test, environment name mapped to environment type.
    */
-  public static function providerTestIsEnv() {
+  public static function providerTestIsEnv(): array {
     return [
       ['dev', 'dev'],
       ['dev1', 'dev'],
@@ -147,7 +148,7 @@ class EnvironmentDetectorTest extends TestCase {
    * @return array
    *   An array of values to test, environment variables value with outcome.
    */
-  public static function providerTestIsCodeStudio() {
+  public static function providerTestIsCodeStudio(): array {
     return [
       [
         'TestJobId',
@@ -170,6 +171,82 @@ class EnvironmentDetectorTest extends TestCase {
         FALSE,
       ],
     ];
+  }
+
+  /**
+   * Tests EnvironmentDetector::isAhMeoEnv().
+   */
+  public function testIsAcquiaMeoEnvTrue() {
+    putenv('AH_ENVIRONMENT_TYPE=meo');
+    $this::assertTrue(AcquiaDrupalEnvironmentDetector::isAhMeoEnv());
+    putenv('AH_ENVIRONMENT_TYPE');
+  }
+
+  /**
+   * Tests EnvironmentDetector::isAhMeoEnv() when not set.
+   */
+  public function testIsAcquiaMeoEnvFalse() {
+    putenv('AH_ENVIRONMENT_TYPE');
+    $this::assertFalse(AcquiaDrupalEnvironmentDetector::isAhMeoEnv());
+  }
+
+  /**
+   * Tests getAhEnvGroup() returns the standard env group in MEO environment.
+   *
+   * MEO is an application type, not an environment type. MEO environments still
+   * have standard env types (prod, stage, dev), so getAhEnvGroup() must return
+   * those rather than 'meo'.
+   */
+  public function testGetAhEnvGroupMeo() {
+    putenv('AH_ENVIRONMENT_TYPE=meo');
+    // MEO prod environment should still return 'prod'.
+    $this::assertEquals('prod', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('prod'));
+    // MEO stage environment should still return 'stage'.
+    $this::assertEquals('stage', AcquiaDrupalEnvironmentDetector::getAhEnvGroup('stg'));
+    putenv('AH_ENVIRONMENT_TYPE');
+  }
+
+  /**
+   * Tests FilePaths::ahSettingsFile() returns the MEO common include in MEO.
+   */
+  public function testAhSettingsFileReturnsMeoPathInMeoEnv() {
+    putenv('AH_ENVIRONMENT_TYPE=meo');
+    $this::assertEquals(
+      '/var/www/site-php/mysite/mysite-settings.common.inc',
+      FilePaths::ahSettingsFile('mysite', 'default')
+    );
+    putenv('AH_ENVIRONMENT_TYPE');
+  }
+
+  /**
+   * Tests FilePaths::ahSettingsFile() returns the standard path outside MEO.
+   */
+  public function testAhSettingsFileReturnsStandardPathOutsideMeo() {
+    putenv('AH_ENVIRONMENT_TYPE');
+    $this::assertEquals(
+      '/var/www/site-php/mysite/mysite-settings.inc',
+      FilePaths::ahSettingsFile('mysite', 'default')
+    );
+  }
+
+  /**
+   * Tests FilePaths::ahSitesFile() returns path in MEO environment.
+   */
+  public function testAhSitesFileInMeoEnv() {
+    putenv('AH_ENVIRONMENT_TYPE=meo');
+    $this::assertEquals(
+      '/var/www/site-php/mysite/mysite-sites.inc',
+      FilePaths::ahSitesFile('mysite')
+    );
+    putenv('AH_ENVIRONMENT_TYPE');
+  }
+
+  /**
+   * Tests FilePaths::ahSitesFile() returns NULL outside MEO.
+   */
+  public function testAhSitesFileOutsideMeoEnv() {
+    putenv('AH_ENVIRONMENT_TYPE');
+    $this::assertNull(FilePaths::ahSitesFile('mysite'));
   }
 
 }

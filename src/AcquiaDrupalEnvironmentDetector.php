@@ -129,9 +129,25 @@ class AcquiaDrupalEnvironmentDetector {
    * Is AH devcloud.
    *
    * The devcloud realm includes Acquia Cloud Professional (ACP).
+   * Note: this does NOT include Acquia MEO environments; use isAhMeoEnv()
+   * for those.
    */
   public static function isAhDevCloud(): bool {
     return self::getAhRealm() === 'devcloud';
+  }
+
+  /**
+   * Is this an Acquia Multi-Experience Operations (MEO) environment.
+   *
+   * MEO environments set AH_ENVIRONMENT_TYPE to 'meo'. They require a
+   * different settings include path than standard ACE environments:
+   * /var/www/site-php/{AH_SITE_GROUP}/{AH_SITE_GROUP}-settings.common.inc.
+   *
+   * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile()
+   * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile()
+   */
+  public static function isAhMeoEnv(): bool {
+    return getenv('AH_ENVIRONMENT_TYPE') === 'meo';
   }
 
   /**
