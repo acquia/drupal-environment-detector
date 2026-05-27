@@ -141,7 +141,7 @@ class AcquiaDrupalEnvironmentDetector {
    *
    * MEO environments set AH_ENVIRONMENT_TYPE to 'meo'. They require a
    * different settings include path than standard ACE environments:
-   * /var/www/site-php/{AH_SITE_GROUP}/{AH_SITE_GROUP}-settings.common.inc
+   * /var/www/site-php/{AH_SITE_GROUP}/{AH_SITE_GROUP}-settings.common.inc.
    *
    * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahSettingsFile()
    * @see \Acquia\DrupalEnvironmentDetector\FilePaths::ahSitesFile()

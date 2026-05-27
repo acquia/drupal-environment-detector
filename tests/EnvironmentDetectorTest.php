@@ -191,7 +191,7 @@ class EnvironmentDetectorTest extends TestCase {
   }
 
   /**
-   * Tests that getAhEnvGroup() returns the standard env group in a MEO environment.
+   * Tests getAhEnvGroup() returns the standard env group in MEO environment.
    *
    * MEO is an application type, not an environment type. MEO environments still
    * have standard env types (prod, stage, dev), so getAhEnvGroup() must return
